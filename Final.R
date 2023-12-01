@@ -473,7 +473,7 @@ conf_intervals_2 <- conf_intervals[,-6]
 bootstrap_coefs_2 <- bootstrap_coefs[,-6]
 
 ## Plotting results
-colnames(conf_intervals_2) <- c("Intercept", "Presence_Brood_Patch_(present)", "Sex_(male)", "Flight_feather_molt_(present)", "Flight_feather_molt_(present)")
+colnames(conf_intervals_2) <- c("Intercept", "Presence_Brood_Patch_(present)", "Sex_(male)", "Flight_feather_molt_(present)", "Body_feather_molt_(present)")
 
 ## Plotting results
 # Create a data frame for forest plot
