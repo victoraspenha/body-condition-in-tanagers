@@ -2,7 +2,6 @@
 ##################################################################################################################################################
 ## This code belongs to Victor Aguiar de Souza Penha
 ## Entittled study: Sex, molt, and brood patch: drivers of body condition variation in Atlantic Forest tanagers (Passeriformes: Thraupidae) 
-## Scientific journal submitted: Emu Australis
 ## Year 2023
 
 ##################################################################################################################################################
