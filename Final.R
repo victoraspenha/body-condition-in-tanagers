@@ -2,6 +2,7 @@
 ##################################################################################################################################################
 ## This code belongs to Victor Aguiar de Souza Penha
 ## Entittled study: Sex, molt, and brood patch: drivers of body condition variation in Atlantic Forest tanagers (Passeriformes: Thraupidae) 
+## Scientific journal submitted: Emu Australis
 ## Year 2023
 
 ##################################################################################################################################################
@@ -356,13 +357,6 @@ table(data$Year)
 table(data[which(data$Year == 1977 | data$Year == 1999),c("Binomial", "Year")])
 data <- data[-which(data$Year == 1977),]
 
-##################################################################################################################################################
-##################################################################################################################################################
-## Final numbers
-manuscript <- as.data.frame(sort(table(data$Binomial)))
-manuscript[order(as.character(manuscript$Var1)),]
-sum(manuscript$Freq)
-length(manuscript$Var1)
 
 ##################################################################################################################################################
 ##################################################################################################################################################
@@ -381,6 +375,15 @@ table(data$Year)
 table(data$State)
 table(data$Age)
 table(data$Body_molt)
+
+##################################################################################################################################################
+##################################################################################################################################################
+## Final numbers
+manuscript <- as.data.frame(sort(table(data$Binomial)))
+manuscript[order(as.character(manuscript$Var1)),]
+sum(manuscript$Freq)
+length(manuscript$Var1)
+
 
 ##################################################################################################################################################
 ##################################################################################################################################################
@@ -418,11 +421,11 @@ vif(model_multi_haplo)
 ## PGLMM
 ## Full model
 mod_1 <- pglmm(normalize(BodyCond) ~ Reproductive_stage + Sex + Flight_molt + Reproductive_stage * Body_molt + 
-                 (1|Longitude_decimal_degrees) + (1|Latitude_decimal_degrees) + (1|BreedingSeason) + (1|Year), data, tree = phylo)
+                 (1|Longitude_decimal_degrees) + (1|Latitude_decimal_degrees) + (1|BreedingSeason) + (1|Year) + (1|Species), data, cov_ranef = list(sp = phylo), tree = phylo)
 
 ## Null model
 mod_1_null <- pglmm(normalize(BodyCond) ~ 1 + 
-                      (1|Longitude_decimal_degrees) + (1|Latitude_decimal_degrees) + (1|BreedingSeason) + (1|Year), data, tree = phylo)
+                      (1|Longitude_decimal_degrees) + (1|Latitude_decimal_degrees) + (1|BreedingSeason) + (1|Year) + (1|Species),  cov_ranef = list(sp = phylo), data, tree = phylo)
 
 ## AIC comparision
 for(i in 1){
@@ -473,7 +476,7 @@ conf_intervals_2 <- conf_intervals[,-6]
 bootstrap_coefs_2 <- bootstrap_coefs[,-6]
 
 ## Plotting results
-colnames(conf_intervals_2) <- c("Intercept", "Presence_Brood_Patch_(present)", "Sex_(male)", "Flight_feather_molt_(present)", "Body_feather_molt_(present)")
+colnames(conf_intervals_2) <- c("Intercept", "Presence_Brood_Patch_(present)", "Sex_(male)", "Flight_feather_molt_(present)", "Flight_feather_molt_(present)")
 
 ## Plotting results
 # Create a data frame for forest plot
